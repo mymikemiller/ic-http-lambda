@@ -113,14 +113,16 @@ async fn handle(
         cid = match request
             .uri()
             .host()
-            .and_then(|h| h.strip_suffix(".ic.nomeata.de").map(|x| x.to_owned()))
+            .and_then(|h| h.strip_suffix(".ic.videate.org)").map(|x| x.to_owned()))
             .and_then(|c| ic_types::Principal::from_text(c).ok())
         {
             Some(c) => c,
             None => {
-                return Err(
-                    format!("Use https://<cid>ic.nomeata.de/!\n(got: {})", request.uri()).into(),
+                return Err(format!(
+                    "Use https://<cid>.ic.videate.org/)/! \n(got: {})",
+                    request.uri()
                 )
+                .into())
             }
         };
     }
